@@ -1,5 +1,13 @@
+import 'package:hive/hive.dart';
+
+part 'owner_model.g.dart';
+
+@HiveType(typeId: 1)
 class OwnerModel {
+  @HiveField(0)
   final String login;
+
+  @HiveField(1)
   final String htmlUrl;
 
   OwnerModel({required this.login, required this.htmlUrl});
