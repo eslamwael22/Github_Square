@@ -31,7 +31,7 @@ class GithubRepositoryImpl implements GithubRepository {
         return localDataSource.getCachedRepos();
       }
 
-      rethrow;
+      throw Exception("Failed to load repositories");
     }
   }
 

@@ -52,7 +52,7 @@ class GithubCubit extends Cubit<GithubState> {
       if (repos.isEmpty) {
         hasReachedMax = true;
       } else {
-        repos.addAll(repos);
+        _repos.addAll(repos);
 
         filteredRepos = List.from(_repos);
 
