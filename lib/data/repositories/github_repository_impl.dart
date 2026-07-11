@@ -1,3 +1,5 @@
+import 'package:dio/dio.dart';
+
 import '../datasource/local/github_local_datasource.dart';
 import '../datasource/remote/github_remote_datasource.dart';
 import '../models/github_repo_model.dart';
@@ -14,9 +16,23 @@ class GithubRepositoryImpl implements GithubRepository {
 
   @override
   Future<List<GithubRepoModel>> getRepos({required int page}) async {
-    final repos = await remoteDataSource.getRepos(page: page);
-    await localDataSource.cacheRepos(repos);
-    return repos;
+    try {
+      final repos = await remoteDataSource.getRepos(page: page);
+
+      if (page == 1) {
+        await localDataSource.saveFirstPage(repos);
+      } else {
+        await localDataSource.addRepos(repos);
+      }
+
+      return repos;
+    } on DioException {
+      if (page == 1) {
+        return localDataSource.getCachedRepos();
+      }
+
+      rethrow;
+    }
   }
 
   @override

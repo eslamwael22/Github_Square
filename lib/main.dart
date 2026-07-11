@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:github_square/core/services/service_locator.dart';
 import 'package:github_square/presentation/screens/home_screen.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await setupLocator();
   runApp(const MyApp());
 }
 

@@ -2,7 +2,9 @@ import 'package:hive_flutter/hive_flutter.dart';
 import '../../models/github_repo_model.dart';
 
 abstract class GithubLocalDataSource {
-  Future<void> cacheRepos(List<GithubRepoModel> repos);
+  Future<void> saveFirstPage(List<GithubRepoModel> repos);
+
+  Future<void> addRepos(List<GithubRepoModel> repos);
 
   List<GithubRepoModel> getCachedRepos();
 
@@ -15,8 +17,13 @@ class GithubLocalDataSourceImpl implements GithubLocalDataSource {
   GithubLocalDataSourceImpl({required this.box});
 
   @override
-  Future<void> cacheRepos(List<GithubRepoModel> repos) async {
+  Future<void> saveFirstPage(List<GithubRepoModel> repos) async {
     await box.clear();
+    await box.addAll(repos);
+  }
+
+  @override
+  Future<void> addRepos(List<GithubRepoModel> repos) async {
     await box.addAll(repos);
   }
 
