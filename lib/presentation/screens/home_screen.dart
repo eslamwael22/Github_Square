@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../business_logic/cubit/github_cubit.dart';
 import '../../business_logic/cubit/github_state.dart';
@@ -56,10 +57,10 @@ class _GithubViewState extends State<GithubView> {
     return Scaffold(
       backgroundColor: const Color(0xffFAFAFA),
       appBar: AppBar(
-        title: const Text(
+        title: Text(
           "Square Repositories",
           style: TextStyle(
-            fontSize: 25,
+            fontSize: 24.sp,
             fontWeight: FontWeight.w400,
 
             color: Color(0xff1E1E1E),
@@ -67,7 +68,7 @@ class _GithubViewState extends State<GithubView> {
         ),
 
         centerTitle: false,
-        toolbarHeight: 85,
+        toolbarHeight: 85.h,
         elevation: 0,
         scrolledUnderElevation: 0,
       ),
@@ -82,15 +83,22 @@ class _GithubViewState extends State<GithubView> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Icon(Icons.error_outline, size: 70, color: Colors.red),
-                  const SizedBox(height: 15),
+                  Icon(Icons.error_outline, size: 70.r, color: Colors.red),
+                  SizedBox(height: 15.h),
                   Text(state.message, textAlign: TextAlign.center),
-                  const SizedBox(height: 20),
+                  SizedBox(height: 20.h),
                   ElevatedButton(
                     onPressed: () {
                       context.read<GithubCubit>().getRepos();
                     },
-                    child: const Text("Retry"),
+                    child: Text(
+                      "Retry",
+                      style: TextStyle(
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.white,
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -107,7 +115,10 @@ class _GithubViewState extends State<GithubView> {
               child: Column(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.all(12),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 12.w,
+                      vertical: 12.h,
+                    ),
                     child: TextField(
                       controller: searchController,
                       onChanged: context.read<GithubCubit>().search,
@@ -121,11 +132,11 @@ class _GithubViewState extends State<GithubView> {
                     ),
                   ),
                   if (state.repos.isEmpty)
-                    const Expanded(
+                    Expanded(
                       child: Center(
                         child: Text(
                           "No repositories found",
-                          style: TextStyle(fontSize: 18),
+                          style: TextStyle(fontSize: 18.sp),
                         ),
                       ),
                     )

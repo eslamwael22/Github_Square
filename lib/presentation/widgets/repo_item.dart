@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../data/models/github_repo_model.dart';
@@ -25,11 +26,11 @@ class RepoItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       color: repo.fork ? Colors.white : Colors.green.shade100,
-      margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      margin: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
       elevation: 2,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: InkWell(
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(12.r),
         mouseCursor: SystemMouseCursors.click,
         onLongPress: () {
           showDialog(
@@ -83,14 +84,14 @@ class RepoItem extends StatelessWidget {
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
               ),
-              const SizedBox(height: 8),
+              SizedBox(height: 8.h),
               Row(
                 children: [
-                  const Icon(Icons.person, size: 16, color: Colors.grey),
-                  const SizedBox(width: 5),
+                  Icon(Icons.person, size: 16.r, color: Colors.grey),
+                  SizedBox(width: 5.w),
                   Text(
                     repo.owner.login,
-                    style: const TextStyle(color: Colors.grey),
+                    style: TextStyle(color: Colors.grey, fontSize: 12.sp),
                   ),
                 ],
               ),
